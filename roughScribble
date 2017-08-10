@@ -2,3 +2,4 @@
 http://localhost/pyurl-dbupdater/reDirectedMsgHandler.cgi?token=sdfsd&formIDs=sdfds23&emailIDs=sdfds23&username=sdfds23
 
 SELECT * FROM admin_logger.AlterLogger where RequestorName LIKE '' AND DatabaseName like '';
+

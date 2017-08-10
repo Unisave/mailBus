@@ -6,7 +6,7 @@ from datetime import datetime
 
 
 # Create instance of FieldStorage 
-form = cgi.FieldStorage() 
+form = cgi.FieldStorage()
 
 # Get data from fields
 
@@ -33,5 +33,6 @@ def responseHandler():
 	print "</html>"
 
 
-def main():
-    responseHandler()
+
+#Main Function initiator
+responseHandler()
