@@ -8,29 +8,41 @@ from datetime import datetime
 
 #input values from response form
 def valueImportFromForm():
-	form = cgi.FieldStorage() # Create instance of FieldStorage 
-	emailID  = form.getvalue('emailIDs')
-	username  = form.getvalue('username')
-	time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+	viff = dict();
+	# form = cgi.FieldStorage() # Create instance of FieldStorage 
+	# viff['emailID']  = form.getvalue('emailIDs')
+	# viff['username']  = form.getvalue('username')
+	# viff['time'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+	# viff['formGenTime'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S::%f')
+	# viff['formID'] = hasher(formGenTime)
+	#############temoMOCKER###############
+	viff['emailID']  = "asdasd"
+	viff['username']  = "asdasd"
+	viff['time'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 	formGenTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S::%f')
-	formID = hasher(formGenTime)
-
+	viff['formID'] = hasher(formGenTime)
+	return(viff)
 
 #salterForTokenGeneration
 def salter():
-	saltedEmailID = hasher(emailID)
-	saltedUsername = hasher(email)
+	sltr = dict();
+	tempemailID = hasher("emailID")
+	tempusername = hasher("username")
+	sltr['saltedEmailID'] = tempemailID
+	sltr['saltedUsername'] = tempusername
+	return(sltr)
 
 def tokenGenerator():
+    tokGen = dict();
     rawtoken = str(saltedEmailID)+str(saltedUsername)
     tokenInit = salter(rawtoken)+str(formID)
-    token = str(tokenInit)+str(formID)
+    temptoken = str(tokenInit)+str(formID)
+    tokGen['token'] = temptoken
+    return(tokGen)
 
 
 
-
-def responsePreview():
-	
+def responsePreview():	
 	print "Content-type:text/html\r\n\r\n"
 	print "<html>"
 	print "<head>"
@@ -49,12 +61,15 @@ def responsePreview():
 
 
 #Main Function initiator
-def moduleCaller():
-	valueImportFromForm()
-	salter()
-	tokenGenerator()
-	responsePreview() #TO BE REMOVED
-	#responseHandler()
+das = valueImportFromForm()
+locals().update(das)
+sltra = salter()
+locals().update(sltra)
+tgenera = tokenGenerator()
+locals().update(tgenera)
+responsePreview() #TO BE REMOVED
+#responseHandler()
 
 
-moduleCaller()
+
+
