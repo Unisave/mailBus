@@ -18,23 +18,23 @@ from hashingFunction import hasher
 
 
 #input values from response form
-def importForm():
+def importForm(genTime):
 	viff = dict();
 	# form = cgi.FieldStorage() # Create instance of FieldStorage 
 	# viff['emailID']  = form.getvalue('emailIDs')
 	# viff['username']  = form.getvalue('username')
-	# viff['time'] = GenTime.strftime('%Y-%m-%d %H:%M:%S')
-	# viff['formGenTime'] = GenTime.strftime('%Y-%m-%d %H:%M:%S::%f')
+	# viff['time'] = genTime.strftime('%Y-%m-%d %H:%M:%S')
+	# viff['formGenTime'] = genTime.strftime('%Y-%m-%d %H:%M:%S::%f')
 	# viff['formID'] = hasher(formGenTime)
 	###############tempMOCKER###############
 	viff['emailID']  = "asdasd"
 	viff['username']  = "asdasd"
-	viff['time'] = GenTime.strftime('%Y-%m-%d %H:%M:%S')
-	formGenTime = GenTime.strftime('%Y-%m-%d %H:%M:%S::%f')
+	viff['accessedTime'] = genTime.strftime('%Y-%m-%d %H:%M:%S')
+	formGenTime = genTime.strftime('%Y-%m-%d %H:%M:%S::%f')
 	viff['formID'] = hasher(formGenTime)
 	return(viff)
  
- def tokenizer(saltedUsername,formID):
+def tokenizer(saltedEmailID,saltedUsername,formID):
     tokGen = dict();
     rawtoken = str(saltedEmailID)+str(saltedUsername)
     tokenInit = hasher(rawtoken)+str(formID)

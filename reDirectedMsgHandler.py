@@ -10,6 +10,8 @@ Created on Sat Aug 12 10:58:26 2017
 
 #System libraries
 from datetime import datetime
+import time
+
 
 #UserCustom libraries
 from hashingFunction import hasher
@@ -17,10 +19,9 @@ from hashingFunction import salter
 from valHandler import importForm
 from valHandler import tokenizer
 
-
 def controller():
-	global formGenTime
-	GenTime = datetime.now()
+	global genTime
+	genTime = datetime.now()
 
 
 def responsePreview():	
@@ -34,21 +35,28 @@ def responsePreview():
 	print "<h6>token form bind ID: %s </h6>" % (formID)
 	print "<h6>mailOriginForToken: %s </h6>" % (emailID)
 	print "<h6>Username: %s </h6>" % (username)
-	print "<h6>Time triggered: %s </h6>" % (time)
-	print "Result: <br> <h1>Mail to %s to mail ID %s with form %s with token ID %s was opened at %s</h1>" % (username,emailID,formID,tokenID,time)
+	print "<h6>Time triggered: %s </h6>" % (accessedTime)
+	print "Result: <br> <h1>Mail to %s to mail ID %s with form %s with token ID %s was opened at %s</h1>" % (username,emailID,formID,tokenID,accessedTime)
 	print "</body>"
 	print "</html>"
+ 	redirector()
+ 
+def redirector():
+	#time.sleep(0.1)
+	print """<meta http-equiv="refresh" content="5; url=http://microsoft.com/">""";
 
 
 
 #Main Function initiator
-das = importForm(formGenTime)
+controller()
+
+das = importForm(genTime)
 locals().update(das)
 
 sltra = salter(emailID,username)
 locals().update(sltra)
 
-tgenera = tokenGenerator(saltedUsername,formID)
+tgenera = tokenizer(saltedEmailID,saltedUsername,formID)
 locals().update(tgenera)
 
 responsePreview() #TO BE REMOVED
