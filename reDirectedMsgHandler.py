@@ -32,10 +32,10 @@ def salter():
 	sltr['saltedUsername'] = tempusername
 	return(sltr)
 
-def tokenGenerator():
+def tokenGenerator(saltedUsername,formID):
     tokGen = dict();
     rawtoken = str(saltedEmailID)+str(saltedUsername)
-    tokenInit = salter(rawtoken)+str(formID)
+    tokenInit = hasher(rawtoken)+str(formID)
     temptoken = str(tokenInit)+str(formID)
     tokGen['token'] = temptoken
     return(tokGen)
@@ -63,10 +63,13 @@ def responsePreview():
 #Main Function initiator
 das = valueImportFromForm()
 locals().update(das)
+
 sltra = salter()
 locals().update(sltra)
-tgenera = tokenGenerator()
+
+tgenera = tokenGenerator(saltedUsername,formID)
 locals().update(tgenera)
+
 responsePreview() #TO BE REMOVED
 #responseHandler()
 
