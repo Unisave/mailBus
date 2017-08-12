@@ -11,17 +11,36 @@ Created on Sat Aug 12 10:58:26 2017
 #System libraries
 from datetime import datetime
 import time
+import cgi, cgitb 
 
 
 #UserCustom libraries
 from hashingFunction import hasher
 from hashingFunction import salter
-from valHandler import importForm
+
 from valHandler import tokenizer
+from valHandler import redirector
+from valHandler import importData
 
 def controller():
 	global genTime
 	genTime = datetime.now()
+
+
+
+
+def importForm():
+	form = cgi.FieldStorage() # Create instance of FieldStorage 
+	mailIDHolder  = form.getvalue('emailIDs')
+	usernameHolder  = form.getvalue('username')
+	###############tempMOCKER###############
+	# viff['emailID']  = "asdasd"
+	# viff['username']  = "asdasd"
+	###############tempMOCKER###############
+	viff = importData(genTime,mailIDHolder,usernameHolder)
+	return(viff)
+
+
 
 
 def responsePreview():	
@@ -39,18 +58,18 @@ def responsePreview():
 	print "Result: <br> <h1>Mail to %s to mail ID %s with form %s with token ID %s was opened at %s</h1>" % (username,emailID,formID,tokenID,accessedTime)
 	print "</body>"
 	print "</html>"
- 	redirector()
+ 	redirURL="google.com"
+	redirector(redirURL)
+	
  
-def redirector():
-	#time.sleep(0.1)
-	print """<meta http-equiv="refresh" content="5; url=http://microsoft.com/">""";
-
+     
+ 
 
 
 #Main Function initiator
 controller()
 
-das = importForm(genTime)
+das = importForm()
 locals().update(das)
 
 sltra = salter(emailID,username)

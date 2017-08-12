@@ -8,31 +8,25 @@ Created on Sat Aug 12 10:58:26 2017
 
 
 #system functions
-import cgi, cgitb 
 from datetime import datetime 
 
 #user functions
 from hashingFunction import hasher
 
-
-
-
-#input values from response form
-def importForm(genTime):
+def importData(genTime,mailIDHolder,usernameHolder):
 	viff = dict();
-	# form = cgi.FieldStorage() # Create instance of FieldStorage 
-	# viff['emailID']  = form.getvalue('emailIDs')
-	# viff['username']  = form.getvalue('username')
-	# viff['time'] = genTime.strftime('%Y-%m-%d %H:%M:%S')
-	# viff['formGenTime'] = genTime.strftime('%Y-%m-%d %H:%M:%S::%f')
-	# viff['formID'] = hasher(formGenTime)
+	viff['emailID']  = mailIDHolder
+	viff['username']  = usernameHolder
 	###############tempMOCKER###############
-	viff['emailID']  = "asdasd"
-	viff['username']  = "asdasd"
+	# viff['emailID']  = "asdasd"
+	# viff['username']  = "asdasd"
+	###############tempMOCKER###############
 	viff['accessedTime'] = genTime.strftime('%Y-%m-%d %H:%M:%S')
 	formGenTime = genTime.strftime('%Y-%m-%d %H:%M:%S::%f')
 	viff['formID'] = hasher(formGenTime)
 	return(viff)
+
+
  
 def tokenizer(saltedEmailID,saltedUsername,formID):
     tokGen = dict();
@@ -41,3 +35,11 @@ def tokenizer(saltedEmailID,saltedUsername,formID):
     temptoken = str(tokenInit)+str(formID)
     tokGen['tokenID'] = temptoken
     return(tokGen)
+
+
+
+
+def redirector(redirURL):
+	#time.sleep(0.1)
+	print "<meta http-equiv=\"refresh\" content=\"5; url=http://microsoft.com/";
+
