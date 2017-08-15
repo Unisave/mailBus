@@ -1,0 +1,42 @@
+
+http://localhost/pyurl-dbupdater/reDirectedMsgHandler.cgi?token=sdfsd&formIDs=sdfds23&emailIDs=sdfds23&username=sdfds23
+
+SELECT * FROM admin_logger.AlterLogger where RequestorName LIKE '' AND DatabaseName like '';
+
+#To extract user ip
+my_ip = urlopen('http://ip.42.pl/raw').read()
+
+
+
+#User request origin geo location tracker
+import requests
+url = 'http://freegeoip.net/json/'
+r = requests.get(url)
+js = r.json()
+
+print "Content-Type: text/html"
+print
+print """\
+<html>
+<body>"""
+print "<h6>token triggered: %s </h6>" % (js['ip'])
+print "<h6>token triggered: %s </h6>" % (js['country_code'])
+print "<h6>token triggered: %s </h6>" % (js['country_name'])
+print "<h6>token triggered: %s </h6>" % (js['region_code'])
+print "<h6>token triggered: %s </h6>" % (js['region_name'])
+print "<h6>token triggered: %s </h6>" % (js['city'])
+print "<h6>token triggered: %s </h6>" % (js['zip_code'])
+print "<h6>token triggered: %s </h6>" % (js['time_zone'])
+print "<h6>token triggered: %s </h6>" % (str(js['latitude']))
+print "<h6>token triggered: %s </h6>" % (str(js['longitude']))
+print """
+</body>
+</html>
+"""
+
+
+
+#write to file
+f = open('tempBuffer.file', 'a')
+f.write('hi there\n')  
+f.close()
