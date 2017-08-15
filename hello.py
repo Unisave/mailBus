@@ -6,12 +6,7 @@ Created on Sat Aug 12 10:58:26 2017
 
 @author: Sooraj Antony
 """
-print "Content-Type: text/html"
-print
-print """\
-<html>
-<body>
-<h2>Hello World!</h2>
-</body>
-</html>
-"""
+#write to file
+f = open('tempBuffer.file', 'a')
+f.write('hi there\n')  
+f.close()

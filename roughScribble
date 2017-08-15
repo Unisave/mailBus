@@ -33,3 +33,10 @@ print """
 </body>
 </html>
 """
+
+
+
+#write to file
+f = open('tempBuffer.file', 'a')
+f.write('hi there\n')  
+f.close()
