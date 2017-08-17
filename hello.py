@@ -9,7 +9,7 @@ Created on Sat Aug 12 10:58:26 2017
 
 
 import sys
-
+from dbUtils import dbTokenStatusChecker
 
 ip = sys.argv[1]
 token = sys.argv[2]
@@ -20,5 +20,9 @@ f.write(ip)
 f.write('\n The token is ')  
 f.write(token)
 f.close()
+
+#DbPrint
+dbTokenStatusChecker(token , ip)
+
 
 

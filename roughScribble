@@ -119,3 +119,31 @@ $path = "1.png";
         echo file_get_contents($path);
         exit;
     }
+
+#python injectionproof MysQL querying
+cursor.execute ("""
+         UPDATE table 
+         SET column = %s
+         WHERE  column2 = %s
+       """, 
+       (var1, var2)
+)
+
+
+
+
+#DB mysql with result verification script
+def dbSingleLineQueryExecutor(execQuery):
+    try:
+        db = MySQLdb.connect(host="192.168.1.14", user="mailBot", passwd="umn1234", db="mailBus")
+        cursor = db.cursor()
+        cursor.execute(execQuery)
+        results = cursor.fetchall()
+        # Check if anything at all is returned
+        if results:
+            print results
+        else:
+            print "NO RESULTS RETURNED"               
+    except MySQLdb.Error:
+        print "ERROR IN CONNECTION"
+    print "Execution completed"
