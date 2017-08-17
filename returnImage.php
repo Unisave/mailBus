@@ -1,6 +1,7 @@
 <?php
 $path = "1.png";
 $token = $_GET['id'];
+
 function curPageURL() {
  $pageURL = 'http';
  if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
@@ -13,7 +14,6 @@ function curPageURL() {
  return $pageURL;
 }
 
-
 function currIP() {
  if (!empty($_SERVER['HTTP_CLIENT_IP'])) { 
      $ip = $_SERVER['HTTP_CLIENT_IP']; 
@@ -25,24 +25,21 @@ function currIP() {
  return $ip;
 }
 
+$t=time();
+echo(date("Y-m-d H:i:s",$t));
+
+
+
 
 
 $arr = (parse_url(curPageURL()));
-// $output = array_slice($arr,1); #NOT NEEDED
-// $url =  implode("",$output); #NOT NEEDED
-
 $ip = currIP();
-// echo $url; #NOT NEEDED
-echo $ip;
-echo $token;
-// echo $_GET['id'] #NOT NEEDED
-// echo $_GET["id"] #NOT NEEDED
+//echo $ip;
+//echo $token;
 $header = $ip." ".$token;
-echo $header;
+//echo $header;
 $python = `python hello.py $header`;
 echo $python;
-// $pythonA = `python hello.py $url`;
-// echo $pythonA;
 
 
 // $path = "1.png"; 
