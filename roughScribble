@@ -53,3 +53,8 @@ def greetings(word1=first_arg, word2=second_arg):
 if __name__ == "__main__":
     greetings()
     greetings("Bonjour", "monde")
+
+#PHP paramter URL extractor
+$parts = parse_url($url);
+parse_str($parts['query'], $query);
+echo $query['email'];
