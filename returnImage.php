@@ -1,7 +1,6 @@
 <?php
-$ip = file_get_contents('http://122.165.116.168/pyurl-dbupdater/ipExtractor.php');
 $path = "1.png";
-
+$token = $_GET['id'];
 function curPageURL() {
  $pageURL = 'http';
  if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
@@ -14,27 +13,45 @@ function curPageURL() {
  return $pageURL;
 }
 
+
+function currIP() {
+ if (!empty($_SERVER['HTTP_CLIENT_IP'])) { 
+     $ip = $_SERVER['HTTP_CLIENT_IP']; 
+ } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) { 
+     $ip = $_SERVER['HTTP_X_FORWARDED_FOR']; 
+ } else { 
+     $ip = $_SERVER['REMOTE_ADDR']; 
+ }
+ return $ip;
+}
+
+
+
 $arr = (parse_url(curPageURL()));
-$output = array_slice($arr,1);
-echo implode("",$output);
-echo PHP_EOL;
+// $output = array_slice($arr,1); #NOT NEEDED
+// $url =  implode("",$output); #NOT NEEDED
+
+$ip = currIP();
+// echo $url; #NOT NEEDED
+echo $ip;
+echo $token;
+// echo $_GET['id'] #NOT NEEDED
+// echo $_GET["id"] #NOT NEEDED
+$header = $ip." ".$token;
+echo $header;
+$python = `python hello.py $header`;
+echo $python;
+// $pythonA = `python hello.py $url`;
+// echo $pythonA;
 
 
-
-
-echo $ip
-// echo $_GET['id']
-// echo $_GET["id"]
-// $header = $ip.$token;
-// echo $header
-// $python = `python hello.py `;
-// echo $python;
-//     if(file_exists($path))
-//     { 
-//         header('Content-Length: '.filesize($path));
-//         header('Content-Type: image/jpg');
-//         header('Content-Disposition: inline; filename="'.$path.'";');
-//         echo file_get_contents($path);
-//         exit;
-//     }
+// $path = "1.png"; 
+    // if(file_exists($path))
+    // { 
+    //     header('Content-Length: '.filesize($path));
+    //     header('Content-Type: image/jpg');
+    //     header('Content-Disposition: inline; filename="'.$path.'";');
+    //     echo file_get_contents($path);
+    //     exit;
+    // }
 ?>
