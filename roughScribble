@@ -58,3 +58,50 @@ if __name__ == "__main__":
 $parts = parse_url($url);
 parse_str($parts['query'], $query);
 echo $query['email'];
+
+
+
+
+#DB operations
+import MySQLdb
+
+def dbQueryExecutor(execQuery):
+    try:
+        db = MySQLdb.connect(host="127.0.0.1", user="root", passwd="umn1234", db="admin_logger")
+        cursor = db.cursor()
+        cursor.execute(execQuery)
+        results = cursor.fetchall()
+        # Check if anything at all is returned
+        if results:
+            print results
+        else:
+            print "NO RESULTS RETURNED"               
+    except MySQLdb.Error:
+        print "ERROR IN CONNECTION"
+    print "Execution completed"
+
+
+##PHP find public IP 
+<?php
+$externalContent = file_get_contents('http://checkip.dyndns.com/');
+preg_match('/Current IP Address: \[?([:.0-9a-fA-F]+)\]?/', $externalContent, $m);
+$externalIp = $m[1];
+echo $externalIp
+?>
+
+
+##PHP find public IP and local IP
+<?php
+if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
+} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+} else {
+    $ip = $_SERVER['REMOTE_ADDR'];
+}
+echo $ip
+?>
+
+
+#forGeoIP tracking
+http://freegeoip.net/json/github.com
