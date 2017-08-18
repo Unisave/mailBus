@@ -26,17 +26,12 @@ function currIP() {
 }
 
 $t=time();
-echo(date("Y-m-d H:i:s",$t));
-
-
-
-
-
+$currTime = date("Y-m-d H:i:s",$t);
 $arr = (parse_url(curPageURL()));
 $ip = currIP();
 //echo $ip;
 //echo $token;
-$header = $ip." ".$token;
+$header = $ip." ".$token." ".$currTime;
 //echo $header;
 $python = `python hello.py $header`;
 echo $python;
