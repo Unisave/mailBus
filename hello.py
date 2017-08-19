@@ -11,8 +11,8 @@ Created on Sat Aug 12 10:58:26 2017
 import sys
 from dbUtils import dbTokenStatusChecker
 
-token = sys.argv[1]
-ip = sys.argv[2]
+token = sys.argv[2]
+ip = sys.argv[1]
 time = sys.argv[3]
 #write to file
 f = open('tempBuffer.file', 'a')
