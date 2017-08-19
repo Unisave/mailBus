@@ -35,11 +35,16 @@ def valueUpdateAppender(varA, varB):
             SELECT %s 
             FROM tokenStatusHandler 
             WHERE token = '%s'
-            """, 
-            (varA , varB)
+            """ 
+            % (varA , varB)
             )
-        outValue = cursorA.fetchall()
-        print varA + " is " + outValue
+        # outValue = cursorA.fetchone()
+        outValues = cursorA.fetchone()
+        # while outValues is not None:
+        outValue =  outValues[0]
+            # cursorA.fetchone()
+
+
         dbA.close
         return(outValue)
     except MySQLdb.Error:
@@ -86,6 +91,7 @@ def tokenExist(tokenNumber,tokenIP,triggerTime,geoJS):
         var2 = triggerTime
         var3 = tokenIP
         var4 = " ("+unicode(geoJS['longitude']) +" :: "+ unicode(geoJS['latitude']) +") , "+ unicode(geoJS['city']) +" , "+ unicode(geoJS['region_name']) +" , "+ unicode(geoJS['zip_code']) +" , "+ unicode(geoJS['country_name'])
+    #var5 = numberOfOpens #UNUSED PLACEHOLDER
         db2 = MySQLdb.connect(host=mysqlHostIP, user=mysqlUser, passwd=mysqlPasswd, db=mysqlDBName) #AUTHENTICATION TO BE ENCRYPTED AND MOVED OUT SOON 
         #enable MySQL tunnel proxy for security ssh user@host.com -L 9990:localhost:3306
         cursor2 = db2.cursor()
@@ -97,7 +103,6 @@ def tokenExist(tokenNumber,tokenIP,triggerTime,geoJS):
                (tokenNumber)
         )
         results2 = cursor2.fetchall()
-        cursor3 = db2.cursor()
         if results2:
             print "Correct token (" + tokenNumber + ") TRIGGERED AT " + triggerTime + " FROM " + tokenIP 
             #SCRIPT TO LOG location and other details
@@ -105,19 +110,78 @@ def tokenExist(tokenNumber,tokenIP,triggerTime,geoJS):
             numberOfOpens = valueUpdateAppender('numberOfOpens' , var1)
             openedLocationIP = valueUpdateAppender('openedLocationIP' , var1)
             openGeoLocation = valueUpdateAppender('openGeoLocation' , var1)
-            print "Final added aggregated values::" + unicode(TIMESTAMPER)
-            print "Final added aggregated values::" + unicode(numberOfOpens)
-            print "Final added aggregated values::" + unicode(openedLocationIP)
-            print "Final added aggregated values::" + unicode(openGeoLocation)
+
+            # print "OLD ENTRY RAW"
+            # print TIMESTAMPER
+            # print numberOfOpens
+            # print openedLocationIP
+            # print openGeoLocation
+
+            # print "NEW ENTRY RAW"
+            # print var2
+            # print var3
+            # print var4
+
+            var2 = "{" + unicode(var2) + " } , "
+            var3 = "{" + unicode(var3) + " } , "
+            var4 = "{" + unicode(var4) + " } , "
+
+            # print "NEW ENTRY PRETTY"
+            # print var2
+            # print var3
+            # print var4
+
+
+            var2 += unicode(TIMESTAMPER)
+            var5 = int(numberOfOpens) + 1
+            var3 += unicode(openedLocationIP)
+            var4 += unicode(openGeoLocation)
+
+            print "FINAL format"
+            print var2
+            print var3
+            print var4
+            print var5
+            print var1
+            try:
+                cursor3 = db2.cursor()
+                cursor3.execute (""" 
+                    UPDATE `tokenStatusHandler`
+                    SET TIMESTAMPER='%s', numberOfOpens='%s', openedLocationIP='%s', openGeoLocation='%s' 
+                    WHERE token = '%s'
+                    """ 
+                    % (unicode(var2), unicode(var5), unicode(var3), unicode(var4), unicode(var1)))
+                results3 = cursor3.fetchall()
+                print results3
+            except MySQLdb.Error:
+                print connectionErrorMsgMysql 
+                print MySQLdb.Error
+            print executionCompleteMsg
         else:
-            print "NOT STARTED due to no copy"
+            try:
+                var2 = "{" + unicode(var2) + " }"
+                var3 = "{" + unicode(var3) + " }"
+                var4 = "{" + unicode(var4) + " }"
+                cursor4 = db2.cursor()
+                cursor4.execute (""" 
+                    INSERT INTO tokenStatusHandler (numberOfOpens, token, openedLocationIP, TIMESTAMPER, openGeoLocation) 
+                    VALUES ('1', '%s', '%s', '%s', '%s')
+                    """ 
+                    % (unicode(var1), unicode(var3), unicode(var2), unicode(var4)))
+                results4 = cursor4.fetchall()
+                print results4
+            except MySQLdb.Error:
+                print connectionErrorMsgMysql 
+                print MySQLdb.Error
+            print executionCompleteMsg
+
+
             # cursor3.execute (" INSERT INTO mailBus.tokenStatusHandler (TIMESTAMPER, token, numberOfOpens, openedLocationIP, openGeoLocation) VALUES ('%s', '%s', '%s', '%s', '%s');" % (var2, var1, , var3, ))
-        results3 = cursor3.fetchall()
         db2.commit()
         db2.close()
-        print resultsa
-        responseNoToken = "BAD TOKEN ENTRY DETECTED FOR TOKEN NUMBER:: " + tokenNumber + " TRIGGERED AT " + triggerTime + " FROM " + tokenIP 
-        print  responseNoToken
+        # print resultsa
+        # responseNoToken = "BAD TOKEN ENTRY DETECTED FOR TOKEN NUMBER:: " + tokenNumber + " TRIGGERED AT " + triggerTime + " FROM " + tokenIP 
+        # print  responseNoToken
     except MySQLdb.Error:
         print connectionErrorMsgMysql 
         print MySQLdb.Error
