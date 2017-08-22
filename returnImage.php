@@ -59,26 +59,26 @@ if(1 === preg_match('/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/', $ip))
     if(1 === preg_match('/[^\d\:\-]/', $currTime))
     {
         $locked = $ip." ".$currTime;
-        echo $locked;
-        echo "Hacker alert1";
+        // echo $locked;
+        // echo "Hacker alert1";
         $pythonX = `python suspiciousEntry.py $locked`;
         // echo $pythonX;
     } else
     {
         if(1 === preg_match('/^[^\W]+$/', $token)){
             // $arr = (parse_url(curPageURL()));
-            echo $ip;
-            echo $token;
-            echo "     asdasd     ";
+            // echo $ip;
+            // echo $token;
+            // echo "     asdasd     ";
             $header = $ip." ".$token." ".$currTime;
-            echo $header;
+            // echo $header;
             $python = `python hello.py $header`;
             // echo $python;
         } else
         {
             $locked = $ip." ".$currTime;
-            echo $locked;
-            echo "Hacker alert2";
+            // echo $locked;
+            // echo "Hacker alert2";
             $pythonX = `python suspiciousEntry.py $locked`;
             // echo $pythonX;
         };
@@ -86,21 +86,21 @@ if(1 === preg_match('/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/', $ip))
 } else
 {
     $locked = $ip." ".$currTime;
-    echo $locked;
-    echo "Hacker alert3";
+    // echo $locked;
+    // echo "Hacker alert3";
     $pythonX = `python suspiciousEntry.py $locked`;
     // echo $pythonX;
 };
 
 
 
-// $path = "10.png"; 
-//     if(file_exists($path))
-//     { 
-//         header('Content-Length: '.filesize($path));
-//         header('Content-Type: image/jpg');
-//         header('Content-Disposition: inline; filename="'.$path.'";');
-//         echo file_get_contents($path);
-//         exit;
-//     }
+$path = "1.png"; 
+    if(file_exists($path))
+    { 
+        header('Content-Length: '.filesize($path));
+        header('Content-Type: image/jpg');
+        header('Content-Disposition: inline; filename="'.$path.'";');
+        echo file_get_contents($path);
+        exit;
+    }
 ?>
