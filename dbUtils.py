@@ -18,9 +18,9 @@ mysqlHostIP="192.168.1.14"
 mysqlUser="mailBot"
 mysqlPasswd="umn1234"
 mysqlDBName="mailBus"
-connectionErrorMsgMysql = "ERROR IN CONNECTION"
-executionCompleteMsg = "Execution completed"
-emptyResultsMsg = "NO RESULTS RETURNED"
+connectionErrorMsgMysql = " "
+executionCompleteMsg = " "
+emptyResultsMsg = " "
 
 
 
@@ -63,7 +63,7 @@ def noTokenExist(tokenNumber,tokenIP,triggerTime,geoJS):
         var2 = triggerTime
         var3 = tokenIP
         var4 = " ("+unicode(geoJS['longitude']) +" :: "+ unicode(geoJS['latitude']) +") , "+ unicode(geoJS['city']) +" , "+ unicode(geoJS['region_name']) +" , "+ unicode(geoJS['zip_code']) +" , "+ unicode(geoJS['country_name'])
-        print var4
+        # print var4
         db1 = MySQLdb.connect(host=mysqlHostIP, user=mysqlUser, passwd=mysqlPasswd, db=mysqlDBName) #AUTHENTICATION TO BE ENCRYPTED AND MOVED OUT SOON 
         #enable MySQL tunnel proxy for security ssh user@host.com -L 9990:localhost:3306
         cursor1 = db1.cursor()
@@ -73,9 +73,9 @@ def noTokenExist(tokenNumber,tokenIP,triggerTime,geoJS):
         results1 = cursor1.fetchall()
         db1.commit()
         db1.close()
-        print results1
+        # print results1
         responseNoToken = "BAD TOKEN ENTRY DETECTED FOR TOKEN NUMBER:: " + tokenNumber + " TRIGGERED AT " + triggerTime + " FROM " + tokenIP 
-        print  responseNoToken
+        # print  responseNoToken
     except MySQLdb.Error:
         print connectionErrorMsgMysql 
         print MySQLdb.Error
@@ -104,7 +104,7 @@ def tokenExist(tokenNumber,tokenIP,triggerTime,geoJS):
         )
         results2 = cursor2.fetchall()
         if results2:
-            print "Correct token (" + tokenNumber + ") TRIGGERED AT " + triggerTime + " FROM " + tokenIP 
+            # print "Correct token (" + tokenNumber + ") TRIGGERED AT " + triggerTime + " FROM " + tokenIP 
             #SCRIPT TO LOG location and other details
             TIMESTAMPER = valueUpdateAppender('TIMESTAMPER' , var1)
             numberOfOpens = valueUpdateAppender('numberOfOpens' , var1)
@@ -137,12 +137,12 @@ def tokenExist(tokenNumber,tokenIP,triggerTime,geoJS):
             var3 += unicode(openedLocationIP)
             var4 += unicode(openGeoLocation)
 
-            print "FINAL format"
-            print var2
-            print var3
-            print var4
-            print var5
-            print var1
+            # print "FINAL format"
+            # print var2
+            # print var3
+            # print var4
+            # print var5
+            # print var1
             try:
                 cursor3 = db2.cursor()
                 cursor3.execute (""" 
@@ -152,7 +152,7 @@ def tokenExist(tokenNumber,tokenIP,triggerTime,geoJS):
                     """ 
                     % (unicode(var2), unicode(var5), unicode(var3), unicode(var4), unicode(var1)))
                 results3 = cursor3.fetchall()
-                print results3
+                # print results3
             except MySQLdb.Error:
                 print connectionErrorMsgMysql 
                 print MySQLdb.Error
@@ -169,7 +169,7 @@ def tokenExist(tokenNumber,tokenIP,triggerTime,geoJS):
                     """ 
                     % (unicode(var1), unicode(var3), unicode(var2), unicode(var4)))
                 results4 = cursor4.fetchall()
-                print results4
+                # print results4
             except MySQLdb.Error:
                 print connectionErrorMsgMysql 
                 print MySQLdb.Error
@@ -213,11 +213,11 @@ def dbTokenStatusChecker(tokenNumber,tokenIP,triggerTime):
         db.close()
         # Check if anything at all is returned
         if results:
-            print "Correct token (" + tokenNumber + ") TRIGGERED AT " + triggerTime + " FROM " + tokenIP 
+            # print "Correct token (" + tokenNumber + ") TRIGGERED AT " + triggerTime + " FROM " + tokenIP 
             #SCRIPT TO LOG location and other details
             tokenExist(tokenNumber,tokenIP,triggerTime,geoJS)
         else:
-            print emptyResultsMsg
+            # print emptyResultsMsg
             noTokenExist(tokenNumber,tokenIP,triggerTime,geoJS)
     except MySQLdb.Error:
         print connectionErrorMsgMysql 

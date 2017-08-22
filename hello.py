@@ -14,13 +14,13 @@ from dbUtils import dbTokenStatusChecker
 token = sys.argv[2]
 ip = sys.argv[1]
 time = sys.argv[3]
-#write to file
-f = open('tempBuffer.file', 'a')
-f.write('\n The ip is ')  
-f.write(ip)  
-f.write('\n The token is ')  
-f.write(token)
-f.close()
+# #write to file
+# f = open('tempBuffer.file', 'a')
+# f.write('\n The ip is ')  
+# f.write(ip)  
+# f.write('\n The token is ')  
+# f.write(token)
+# f.close()
 
 #DbPrint
 dbTokenStatusChecker(token , ip , time)
