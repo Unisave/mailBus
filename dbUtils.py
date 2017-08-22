@@ -16,12 +16,12 @@ from valHandler import location
 #variableDeclarations
 mysqlHostIP="192.168.1.14"
 mysqlUser="mailBot"
+mysqlHackuser="hackLog"
 mysqlPasswd="umn1234"
 mysqlDBName="mailBus"
 connectionErrorMsgMysql = " "
 executionCompleteMsg = " "
 emptyResultsMsg = " "
-
 
 
 def valueUpdateAppender(varA, varB):
@@ -75,6 +75,29 @@ def noTokenExist(tokenNumber,tokenIP,triggerTime,geoJS):
         db1.close()
         # print results1
         responseNoToken = "BAD TOKEN ENTRY DETECTED FOR TOKEN NUMBER:: " + tokenNumber + " TRIGGERED AT " + triggerTime + " FROM " + tokenIP 
+        # print  responseNoToken
+    except MySQLdb.Error:
+        print connectionErrorMsgMysql 
+        print MySQLdb.Error
+    print executionCompleteMsg
+
+
+
+def hackAttemptExist(tokenIP,triggerTime):
+    try:
+        var1 = tokenIP
+        var2 = triggerTime
+        dbX = MySQLdb.connect(host=mysqlHostIP, user=mysqlHackuser, passwd=mysqlPasswd, db=mysqlDBName) #AUTHENTICATION TO BE ENCRYPTED AND MOVED OUT SOON 
+        #enable MySQL tunnel proxy for security ssh user@host.com -L 9990:localhost:3306
+        cursorX = dbX.cursor()
+        cursorX.execute (""" INSERT INTO hackLog(IPLOG, TIMELOG)
+            VALUES ('%s', '%s') """ 
+            % (var1, var2))
+        resultsX = cursorX.fetchall()
+        dbX.commit()
+        dbX.close()
+        # print results1
+        # responseNoToken = "HACK TOKEN ENTRY RECORDED FROM:: " + tokenIP + " TRIGGERED AT " + triggerTime
         # print  responseNoToken
     except MySQLdb.Error:
         print connectionErrorMsgMysql 
