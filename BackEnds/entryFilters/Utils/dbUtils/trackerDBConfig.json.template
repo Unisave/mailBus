@@ -1,0 +1,100 @@
+{
+    "selectTSHuser":
+    {
+        "HostIP":"<input db hostIP>", 
+        "User":"<input db username>", 
+        "Passwd":"<input db passwd>", 
+        "DBName":"<input db schema name>",
+    }, 
+    "TSHuser":
+    {
+        "HostIP":"<input db hostIP>", 
+        "User":"<input db username>", 
+        "Passwd":"<input db passwd>", 
+        "DBName":"<input db schema name>",
+    }, 
+    "tempTonMapSel":
+    {
+        "HostIP":"<input db hostIP>", 
+        "User":"<input db username>", 
+        "Passwd":"<input db passwd>", 
+        "DBName":"<input db schema name>",
+    }, 
+    "tempTrakMapSel":
+    {
+        "HostIP":"<input db hostIP>", 
+        "User":"<input db username>", 
+        "Passwd":"<input db passwd>", 
+        "DBName":"<input db schema name>",
+    }, 
+    "TonStatHlrSel":
+    {
+        "HostIP":"<input db hostIP>", 
+        "User":"<input db username>", 
+        "Passwd":"<input db passwd>", 
+        "DBName":"<input db schema name>",
+    }, 
+    "TrakStatHlrSel":
+    {
+        "HostIP":"<input db hostIP>", 
+        "User":"<input db username>", 
+        "Passwd":"<input db passwd>", 
+        "DBName":"<input db schema name>",
+    }, 
+    "badTontempIns":
+    {
+        "HostIP":"<input db hostIP>", 
+        "User":"<input db username>", 
+        "Passwd":"<input db passwd>", 
+        "DBName":"<input db schema name>",
+    }, 
+    "badTraktempIns":
+    {
+        "HostIP":"<input db hostIP>", 
+        "User":"<input db username>", 
+        "Passwd":"<input db passwd>", 
+        "DBName":"<input db schema name>",
+    }, 
+    "hackClickLogIns":
+    {
+        "HostIP":"<input db hostIP>", 
+        "User":"<input db username>", 
+        "Passwd":"<input db passwd>", 
+        "DBName":"<input db schema name>",
+    }, 
+    "hackLogIns":
+    {
+        "HostIP":"<input db hostIP>", 
+        "User":"<input db username>", 
+        "Passwd":"<input db passwd>", 
+        "DBName":"<input db schema name>",
+    }, 
+    "TonStatHlrIns":
+    {
+        "HostIP":"<input db hostIP>", 
+        "User":"<input db username>", 
+        "Passwd":"<input db passwd>", 
+        "DBName":"<input db schema name>",
+    }, 
+    "TrakStatHlrIns":
+    {
+        "HostIP":"<input db hostIP>", 
+        "User":"<input db username>", 
+        "Passwd":"<input db passwd>", 
+        "DBName":"<input db schema name>",
+    }, 
+    "TonStatHlrUpd":
+    {
+        "HostIP":"<input db hostIP>", 
+        "User":"<input db username>", 
+        "Passwd":"<input db passwd>", 
+        "DBName":"<input db schema name>",
+    }, 
+    "TrakStatHlrUpd":
+    {
+        "HostIP":"<input db hostIP>", 
+        "User":"<input db username>", 
+        "Passwd":"<input db passwd>", 
+        "DBName":"<input db schema name>",
+    }
+}

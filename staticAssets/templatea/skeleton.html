@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Proba</title>
+</head>
+<body>
+<center>
+<img src="http://122.165.116.168/pyurl-dbupdater/returnImage.php?id={{ url }}" alt="Smiley face" >
+
+    <h1>Option List</h1>
+</center>
+<ol align="left">
+
+{% for dict_item in parent_dict %}
+   {% for key, value in dict_item.items() %}
+	<li><a href="{{ dict_item }} - http://122.165.116.168/pyurl-dbupdater/ClickRecorder.php?tracker={{ key }}{{ value }}"> Yes </a></li>
+   {% endfor %}
+{% endfor %}
+<!-- 
+<li><a href="http://122.165.116.168/pyurl-dbupdater/ClickRecorder.php?tracker={{ trackerA }}"> Yes </a></li>
+<li><a href="http://122.165.116.168/pyurl-dbupdater/ClickRecorder.php?tracker={{ trackerB }}"> No </a></li>
+<li><a href="http://122.165.116.168/pyurl-dbupdater/ClickRecorder.php?tracker={{ trackerC }}"> Maybe </a></li> -->
+</ol>
+</body>
+</html>

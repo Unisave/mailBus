@@ -2,10 +2,9 @@
 
 
 //ACTUAL DATA GATHERER=========================================
-$path = "staticAssets/images/logo.png";
 $t=time();
 
-$token = $_GET['id'];
+$tracker = $_GET['tracker'];
 
 $currTime = date("Y-m-d::H:i:s",$t);
 
@@ -23,55 +22,49 @@ $ip = currIP();
 //=============================================================
 
 //MOCK SIMULATOR
-//====FALSE TOKEN======
-// $token = "asdasda";
+//====FALSE tracker======
+// $tracker = "asdasda";
 // $currTime = "5:60";
 // $ip = "5.5.5.5"; 
 //====================
 //====FALSE IP========
-// $token = "asdas";
+// $tracker = "asdas";
 // $currTime = "5:60";
 // $ip = "hfd"; 
 //====================
 //====FALSE TIME======
-// $token = "asdas";
+// $tracker = "asdas";
 // $currTime = "bleh";
 // $ip = "5.5.5.5"; 
 //====================
 
 
-
+echo "<html><head><title>Updated profile</title></head></html>";
 if(1 === preg_match('/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/', $ip))
 {
     if(1 === preg_match('/[^\d\:\-]/', $currTime))
     {
         $locked = $ip." ".$currTime;
-        $pythonX1 = `python BackEnds/entryFilters/suspiciousEntry.py $locked`;
+        $pythonX1 = `python BackEnds/entryFilters/suspiciousClick.py $locked`;
+        // echo $pythonX1;
     } else
     {
-        if(1 === preg_match('/^[^\W]+$/', $token)){
-            $header = $ip." ".$token." ".$currTime;
-            $python = `python BackEnds/entryFilters/recieverEntry.py $header`;
+        if(1 === preg_match('/^[^\W]+$/', $tracker)){
+            $header = $ip." ".$tracker." ".$currTime;
+            $python = `python BackEnds/entryFilters/recieverClick.py $header`;
+            // echo $python;
         } else
         {
             $locked = $ip." ".$currTime;
-            $pythonX2 = `python BackEnds/entryFilters/suspiciousEntry.py $locked`;
+            $pythonX2 = `python BackEnds/entryFilters/suspiciousClick.py $locked`;
+            // echo $pythonX2;
         };
     };
 } else
 {
     $locked = $ip." ".$currTime;
-    $pythonX3 = `python BackEnds/entryFilters/suspiciousEntry.py $locked`;
+    $pythonX3 = `python BackEnds/entryFilters/suspiciousClick.py $locked`;
+    // echo $pythonX3;
 };
-
-    if(file_exists($path))
-    { 
-        header('Content-Length: '.filesize($path));
-        header('Content-Type: image/jpg');
-        header('Content-Disposition: inline; filename="'.$path.'";');
-        echo file_get_contents($path);
-        exit;
-    }
-
-
+// echo "<script>window.close();</script>";
 ?>

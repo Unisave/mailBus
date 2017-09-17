@@ -1,0 +1,12 @@
+{
+    "CHAEResponses":{ "connectionErrorMsgMysql":"CHAE connect error", "MySQLdb.Error":"CHAE db error", "executionCompleteMsg":"CHAEcompleted" },
+    "CNTEResponses":{ "connectionErrorMsgMysql":"CNTE connect error", "MySQLdb.Error":"CNTE db error", "executionCompleteMsg":"CNTEcompleted" },
+    "CTEResponses":{ "connectionErrorMsgMysql":"CTE connect error", "MySQLdb.Error":"CTE db error", "executionCompleteMsg":"CTEcompleted" },
+    "CTSUResponses":{ "connectionErrorMsgMysql":"CTSU connect error", "MySQLdb.Error":"CTSU db error", "executionCompleteMsg":"CTSUcompleted" },
+    "CVUAResponses":{ "connectionErrorMsgMysql":"CVUA connect error", "MySQLdb.Error":"CVUA db error", "executionCompleteMsg":"CVUAcompleted" },
+    "HAEResponses":{ "connectionErrorMsgMysql":"HAE connect error", "MySQLdb.Error":"HAE db error", "executionCompleteMsg":"HAEcompleted" },
+    "NTEResponses":{ "connectionErrorMsgMysql":"NTE connect error", "MySQLdb.Error":"NTE db error", "executionCompleteMsg":"NTEcompleted" },
+    "TEResponses":{ "connectionErrorMsgMysql":"TE connect error", "MySQLdb.Error":"TE db error", "executionCompleteMsg":"TEcompleted" },
+    "TSCResponses":{ "connectionErrorMsgMysql":"TSC connect error", "MySQLdb.Error":"TSC db error", "executionCompleteMsg":"TSCcompleted" },
+    "VUAResponses":{ "connectionErrorMsgMysql":"VUA connect error", "MySQLdb.Error":"VUA db error", "executionCompleteMsg":"VUAcompleted" }
+}
