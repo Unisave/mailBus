@@ -1,0 +1,152 @@
+
+http://localhost/pyurl-dbupdater/reDirectedMsgHandler.cgi?token=sdfsd&formIDs=sdfds23&emailIDs=sdfds23&username=sdfds23
+
+SELECT * FROM admin_logger.AlterLogger where RequestorName LIKE '' AND DatabaseName like '';
+
+#To extract user ip
+my_ip = urlopen('http://ip.42.pl/raw').read()
+
+
+
+#User request origin geo location tracker
+import requests
+url = 'http://freegeoip.net/json/'
+r = requests.get(url)
+js = r.json()
+
+print "Content-Type: text/html"
+print
+print """\
+<html>
+<body>"""
+print "<h6>token triggered: %s </h6>" % (js['ip'])
+print "<h6>token triggered: %s </h6>" % (js['country_code'])
+print "<h6>token triggered: %s </h6>" % (js['country_name'])
+print "<h6>token triggered: %s </h6>" % (js['region_code'])
+print "<h6>token triggered: %s </h6>" % (js['region_name'])
+print "<h6>token triggered: %s </h6>" % (js['city'])
+print "<h6>token triggered: %s </h6>" % (js['zip_code'])
+print "<h6>token triggered: %s </h6>" % (js['time_zone'])
+print "<h6>token triggered: %s </h6>" % (str(js['latitude']))
+print "<h6>token triggered: %s </h6>" % (str(js['longitude']))
+print """
+</body>
+</html>
+"""
+
+
+
+#write to file
+f = open('tempBuffer.file', 'a')
+f.write('hi there\n')  
+f.close()
+
+
+
+#pythonTerminal trigger
+import sys
+first_arg = sys.argv[1]
+second_arg = sys.argv[2]
+def greetings(word1=first_arg, word2=second_arg):
+    print("{} {}".format(word1, word2))
+
+if __name__ == "__main__":
+    greetings()
+    greetings("Bonjour", "monde")
+
+#PHP paramter URL extractor
+$parts = parse_url($url);
+parse_str($parts['query'], $query);
+echo $query['email'];
+
+
+
+
+#DB operations
+import MySQLdb
+
+def dbQueryExecutor(execQuery):
+    try:
+        db = MySQLdb.connect(host="127.0.0.1", user="root", passwd="umn1234", db="admin_logger")
+        cursor = db.cursor()
+        cursor.execute(execQuery)
+        results = cursor.fetchall()
+        # Check if anything at all is returned
+        if results:
+            print results
+        else:
+            print "NO RESULTS RETURNED"               
+    except MySQLdb.Error:
+        print "ERROR IN CONNECTION"
+    print "Execution completed"
+
+
+##PHP find public IP 
+<?php
+$externalContent = file_get_contents('http://checkip.dyndns.com/');
+preg_match('/Current IP Address: \[?([:.0-9a-fA-F]+)\]?/', $externalContent, $m);
+$externalIp = $m[1];
+echo $externalIp
+?>
+
+
+##PHP find public IP and local IP
+<?php
+if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
+} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+} else {
+    $ip = $_SERVER['REMOTE_ADDR'];
+}
+echo $ip
+?>
+
+
+#forGeoIP tracking
+http://freegeoip.net/json/github.com
+
+
+
+#image render using php
+
+$path = "1.png";
+    if(file_exists($path))
+    { 
+        header('Content-Length: '.filesize($path));
+        header('Content-Type: image/jpg');
+        header('Content-Disposition: inline; filename="'.$path.'";');
+        echo file_get_contents($path);
+        exit;
+    }
+
+#python injectionproof MysQL querying
+cursor.execute ("""
+         UPDATE table 
+         SET column = %s
+         WHERE  column2 = %s
+       """, 
+       (var1, var2)
+)
+#FOR INSERT
+cursor1.execute (" INSERT INTO bad_Tokens_temp(token, TIMESTAMPER, badIP) VALUES ('%s', '%s', '%s') " % (var1, var2, var3))
+
+
+
+
+
+#DB mysql with result verification script
+def dbSingleLineQueryExecutor(execQuery):
+    try:
+        db = MySQLdb.connect(host="192.168.1.14", user="mailBot", passwd="umn1234", db="mailBus")
+        cursor = db.cursor()
+        cursor.execute(execQuery)
+        results = cursor.fetchall()
+        # Check if anything at all is returned
+        if results:
+            print results
+        else:
+            print "NO RESULTS RETURNED"               
+    except MySQLdb.Error:
+        print "ERROR IN CONNECTION"
+    print "Execution completed"
