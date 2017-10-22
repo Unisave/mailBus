@@ -5,6 +5,7 @@
         "User":"<input db username>", 
         "Passwd":"<input db passwd>", 
         "DBName":"<input db schema name>",
+	"TabName":"<input db table name>"
     }, 
     "TSHuser":
     {
@@ -12,6 +13,7 @@
         "User":"<input db username>", 
         "Passwd":"<input db passwd>", 
         "DBName":"<input db schema name>",
+	"TabName":"<input db table name>"
     }, 
     "tempTonMapSel":
     {
@@ -19,6 +21,7 @@
         "User":"<input db username>", 
         "Passwd":"<input db passwd>", 
         "DBName":"<input db schema name>",
+	"TabName":"<input db table name>"
     }, 
     "tempTrakMapSel":
     {
@@ -26,6 +29,7 @@
         "User":"<input db username>", 
         "Passwd":"<input db passwd>", 
         "DBName":"<input db schema name>",
+	"TabName":"<input db table name>"
     }, 
     "TonStatHlrSel":
     {
@@ -33,6 +37,7 @@
         "User":"<input db username>", 
         "Passwd":"<input db passwd>", 
         "DBName":"<input db schema name>",
+	"TabName":"<input db table name>"
     }, 
     "TrakStatHlrSel":
     {
@@ -40,6 +45,7 @@
         "User":"<input db username>", 
         "Passwd":"<input db passwd>", 
         "DBName":"<input db schema name>",
+	"TabName":"<input db table name>"
     }, 
     "badTontempIns":
     {
@@ -47,6 +53,7 @@
         "User":"<input db username>", 
         "Passwd":"<input db passwd>", 
         "DBName":"<input db schema name>",
+	"TabName":"<input db table name>"
     }, 
     "badTraktempIns":
     {
@@ -54,6 +61,7 @@
         "User":"<input db username>", 
         "Passwd":"<input db passwd>", 
         "DBName":"<input db schema name>",
+	"TabName":"<input db table name>"
     }, 
     "hackClickLogIns":
     {
@@ -61,6 +69,7 @@
         "User":"<input db username>", 
         "Passwd":"<input db passwd>", 
         "DBName":"<input db schema name>",
+	"TabName":"<input db table name>"
     }, 
     "hackLogIns":
     {
@@ -68,6 +77,7 @@
         "User":"<input db username>", 
         "Passwd":"<input db passwd>", 
         "DBName":"<input db schema name>",
+	"TabName":"<input db table name>"
     }, 
     "TonStatHlrIns":
     {
@@ -75,6 +85,7 @@
         "User":"<input db username>", 
         "Passwd":"<input db passwd>", 
         "DBName":"<input db schema name>",
+	"TabName":"<input db table name>"
     }, 
     "TrakStatHlrIns":
     {
@@ -82,6 +93,7 @@
         "User":"<input db username>", 
         "Passwd":"<input db passwd>", 
         "DBName":"<input db schema name>",
+	"TabName":"<input db table name>"
     }, 
     "TonStatHlrUpd":
     {
@@ -89,6 +101,7 @@
         "User":"<input db username>", 
         "Passwd":"<input db passwd>", 
         "DBName":"<input db schema name>",
+	"TabName":"<input db table name>"
     }, 
     "TrakStatHlrUpd":
     {
@@ -96,5 +109,6 @@
         "User":"<input db username>", 
         "Passwd":"<input db passwd>", 
         "DBName":"<input db schema name>",
+	"TabName":"<input db table name>"
     }
 }
