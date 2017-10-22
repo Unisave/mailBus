@@ -122,7 +122,7 @@ def tokenExist(tokenNumber,tokenIP,triggerTime,geoJS):
         cursor2.execute ("""
                  SELECT token 
                  FROM tokenStatusHandler
-                 WHERE token = %s
+                 WHERE token = '%s'
                """, 
                (tokenNumber)
         )
@@ -229,7 +229,7 @@ def dbTokenStatusChecker(tokenNumber,tokenIP,triggerTime):
         cursor.execute ("""
                  SELECT token 
                  FROM temptokenMapper
-                 WHERE token = %s
+                 WHERE token = '%s'
                """, 
                (tokenNumber)
         )
