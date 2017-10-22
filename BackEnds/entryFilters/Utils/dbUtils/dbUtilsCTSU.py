@@ -28,6 +28,7 @@ with open('./BackEnds/entryFilters/Utils/dbUtils/trackerDBConfig.json') as json_
     mysqlUser = authdata["tempTrakMapSel"]["User"]
     mysqlPasswd = authdata["tempTrakMapSel"]["Passwd"]
     mysqlDBName = authdata["tempTrakMapSel"]["DBName"]
+    mysqlTabName = authdata["tempTrakMapSel"]["TabName"]
 
 with open('./BackEnds/entryFilters/Utils/dbUtils/dbResponses.json') as json_response_file:
     respodata = json.load(json_response_file)
@@ -42,10 +43,10 @@ def dbTrackerStatusUpdator(trackerNumber,trackerIP,triggerTime):
         cursor = db.cursor()
         cursor.execute ("""
                  SELECT tracker 
-                 FROM temptrackerMapper
-                 WHERE tracker = %s
-               """, 
-               (trackerNumber)
+                 FROM %s
+                 WHERE tracker = '%s'
+               """ 
+               % (mysqlTabName, trackerNumber)
         )
         results = cursor.fetchall()
         db.close()

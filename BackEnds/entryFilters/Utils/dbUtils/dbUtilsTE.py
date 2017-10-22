@@ -23,14 +23,17 @@ with open('./BackEnds/entryFilters/Utils/dbUtils/trackerDBConfig.json') as json_
     db2mysqlUser = authdata["TonStatHlrSel"]["User"]
     db2mysqlPasswd = authdata["TonStatHlrSel"]["Passwd"]
     db2mysqlDBName = authdata["TonStatHlrSel"]["DBName"]
+    db2mysqlTabName = authdata["TonStatHlrSel"]["TabName"]
     db3mysqlHostIP = authdata["TonStatHlrUpd"]["HostIP"]
     db3mysqlUser = authdata["TonStatHlrUpd"]["User"]
     db3mysqlPasswd = authdata["TonStatHlrUpd"]["Passwd"]
     db3mysqlDBName = authdata["TonStatHlrUpd"]["DBName"]
+    db3mysqlTabName = authdata["TonStatHlrUpd"]["TabName"]
     db4mysqlHostIP = authdata["TonStatHlrIns"]["HostIP"]
     db4mysqlUser = authdata["TonStatHlrIns"]["User"]
     db4mysqlPasswd = authdata["TonStatHlrIns"]["Passwd"]
     db4mysqlDBName = authdata["TonStatHlrIns"]["DBName"]
+    db4mysqlTabName = authdata["TonStatHlrIns"]["TabName"]
 
 with open('./BackEnds/entryFilters/Utils/dbUtils/dbResponses.json') as json_response_file:
     respodata = json.load(json_response_file)
@@ -48,16 +51,17 @@ def tokenExist(tokenNumber,tokenIP,triggerTime,geoJS):
         #enable MySQL tunnel proxy for security ssh user@host.com -L 9990:localhost:3306
         cursor2 = db2.cursor()
         cursor2.execute ("""
-                 SELECT token 
-                 FROM tokenStatusHandler
-                 WHERE token = %s
-               """, 
-               (tokenNumber)
+            SELECT token 
+            FROM %s
+            WHERE token = '%s'
+            """ 
+            % (db2mysqlTabName, tokenNumber)
         )
-        results2 = cursor2.fetchall()
+        recordExist = cursor2.fetchall()
+        # print "DONE"
         db2.commit()
         db2.close()
-        if results2:
+        if recordExist:
             numberOfOpens = valueUpdateAppender('numberOfOpens' , var1)
             TIMESTAMPER = valueUpdateAppender('TIMESTAMPER' , var1)
             openedLocationIP = valueUpdateAppender('openedLocationIP' , var1)
@@ -66,18 +70,17 @@ def tokenExist(tokenNumber,tokenIP,triggerTime,geoJS):
             var3 = "{" + unicode(var3) + " } , " + unicode(openedLocationIP)
             var4 = "{" + unicode(var4) + " } , " + unicode(openGeoLocation)
             var5 = int(numberOfOpens) + 1
-            
-            
-            
+
             try:
                 db3 = MySQLdb.connect(host=db3mysqlHostIP, user=db3mysqlUser, passwd=db3mysqlPasswd, db=db3mysqlDBName)
                 cursor3 = db3.cursor()
-                cursor3.execute (""" 
-                    UPDATE `tokenStatusHandler`
+                cursor3.execute ("""
+                    UPDATE `tokenStatusHandler` 
                     SET TIMESTAMPER='%s', numberOfOpens='%s', openedLocationIP='%s', openGeoLocation='%s' 
-                    WHERE token = '%s'
-                    """ 
+                    WHERE token = '%s';
+                    """
                     % (unicode(var2), unicode(var5), unicode(var3), unicode(var4), unicode(var1)))
+
                 results3 = cursor3.fetchall()
                 db3.commit()
                 db3.close()
@@ -92,11 +95,12 @@ def tokenExist(tokenNumber,tokenIP,triggerTime,geoJS):
                 var4 = "{" + unicode(var4) + " }"
                 db4 = MySQLdb.connect(host=db4mysqlHostIP, user=db4mysqlUser, passwd=db4mysqlPasswd, db=db4mysqlDBName)
                 cursor4 = db4.cursor()
+                print db4mysqlTabName
                 cursor4.execute (""" 
-                    INSERT INTO tokenStatusHandler (numberOfOpens, token, openedLocationIP, TIMESTAMPER, openGeoLocation) 
+                    INSERT INTO %s (numberOfOpens, token, openedLocationIP, TIMESTAMPER, openGeoLocation) 
                     VALUES ('1', '%s', '%s', '%s', '%s')
                     """ 
-                    % (unicode(var1), unicode(var3), unicode(var2), unicode(var4)))
+                    % (db4mysqlTabName, unicode(var1), unicode(var3), unicode(var2), unicode(var4)))
                 results4 = cursor4.fetchall()
                 db4.commit()
                 db4.close()

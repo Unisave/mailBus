@@ -24,10 +24,11 @@ from dbUtilsNTE import noTokenExist
 #variableDeclarations
 with open('./BackEnds/entryFilters/Utils/dbUtils/trackerDBConfig.json') as json_auth_file:
     authdata = json.load(json_auth_file)
-    mysqlHostIP = authdata["selectTSHuser"]["HostIP"]
-    mysqlUser = authdata["selectTSHuser"]["User"]
-    mysqlPasswd = authdata["selectTSHuser"]["Passwd"]
-    mysqlDBName = authdata["selectTSHuser"]["DBName"]
+    mysqlHostIP = authdata["tempTonMapSel"]["HostIP"]
+    mysqlUser = authdata["tempTonMapSel"]["User"]
+    mysqlPasswd = authdata["tempTonMapSel"]["Passwd"]
+    mysqlDBName = authdata["tempTonMapSel"]["DBName"]
+    mysqlTabName = authdata["tempTonMapSel"]["TabName"]
 
 with open('./BackEnds/entryFilters/Utils/dbUtils/dbResponses.json') as json_response_file:
     respodata = json.load(json_response_file)
@@ -41,12 +42,11 @@ def dbTokenStatusChecker(tokenNumber,tokenIP,triggerTime):
         db = MySQLdb.connect(host=mysqlHostIP, user=mysqlUser, passwd=mysqlPasswd, db=mysqlDBName) #enable MySQL tunnel proxy for security ssh user@host.com -L 9990:localhost:3306
         cursor = db.cursor()
         cursor.execute ("""
-                 SELECT token 
-                 FROM temptokenMapper
-                 WHERE token = %s
-               """, 
-               (tokenNumber)
-        )
+                SELECT token 
+                FROM %s
+                WHERE token = '%s'
+                """
+                % (mysqlTabName, tokenNumber))
         results = cursor.fetchall()
         db.close()
         # Check if anything at all is returned

@@ -16,13 +16,16 @@ import json
 
 
 #variableDeclarations
+#MysQLAuth centralised delcaration
 with open('./BackEnds/entryFilters/Utils/dbUtils/trackerDBConfig.json') as json_auth_file:
     authdata = json.load(json_auth_file)
     mysqlHostIP = authdata["hackLogIns"]["HostIP"]
     mysqlHackuser = authdata["hackLogIns"]["User"]
     mysqlPasswd = authdata["hackLogIns"]["Passwd"]
     mysqlDBName = authdata["hackLogIns"]["DBName"]
+    mysqlTabName = authdata["hackLogIns"]["TabName"]
 
+#MySQL response string decalaration centralised
 with open('./BackEnds/entryFilters/Utils/dbUtils/dbResponses.json') as json_response_file:
     respodata = json.load(json_response_file)
     connectionErrorMsgMysql = respodata["HAEResponses"]["connectionErrorMsgMysql"]
@@ -36,9 +39,9 @@ def hackAttemptExist(tokenIP,triggerTime):
         dbX = MySQLdb.connect(host=mysqlHostIP, user=mysqlHackuser, passwd=mysqlPasswd, db=mysqlDBName) #AUTHENTICATION TO BE ENCRYPTED AND MOVED OUT SOON 
         #enable MySQL tunnel proxy for security ssh user@host.com -L 9990:localhost:3306
         cursorX = dbX.cursor()
-        cursorX.execute (""" INSERT INTO hackLog(IPLOG, TIMELOG)
+        cursorX.execute (""" INSERT INTO %s(IPLOG, TIMELOG)
             VALUES ('%s', '%s') """ 
-            % (var1, var2))
+            % (mysqlTabName, var1, var2))
         resultsX = cursorX.fetchall()
         dbX.commit()
         dbX.close()

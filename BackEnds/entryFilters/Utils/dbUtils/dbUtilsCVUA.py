@@ -24,6 +24,7 @@ with open('./BackEnds/entryFilters/Utils/dbUtils/trackerDBConfig.json') as json_
     mysqlUser = authdata["TrakStatHlrSel"]["User"]
     mysqlPasswd = authdata["TrakStatHlrSel"]["Passwd"]
     mysqlDBName = authdata["TrakStatHlrSel"]["DBName"]
+    mysqlTabName = authdata["TrakStatHlrSel"]["TabName"]
 
 with open('./BackEnds/entryFilters/Utils/dbUtils/dbResponses.json') as json_response_file:
     respodata = json.load(json_response_file)
@@ -39,10 +40,10 @@ def valueClickUpdateAppender(varA, varB):
         
         cursorA.execute (""" 
             SELECT %s 
-            FROM trackerStatusHandler 
+            FROM %s 
             WHERE tracker = '%s'
             """ 
-            % (varA , varB)
+            % (varA, mysqlTabName, varB)
             )
         outValues = cursorA.fetchone()
         outValue =  outValues[0]

@@ -20,10 +20,11 @@ import json
 
 with open('./BackEnds/entryFilters/Utils/dbUtils/trackerDBConfig.json') as json_auth_file:
     authdata = json.load(json_auth_file)
-    mysqlHostIP = authdata["TonStatHlrUpd"]["HostIP"]
-    mysqlUser = authdata["TonStatHlrUpd"]["User"]
-    mysqlPasswd = authdata["TonStatHlrUpd"]["Passwd"]
-    mysqlDBName = authdata["TonStatHlrUpd"]["DBName"]
+    mysqlHostIP = authdata["TonStatHlrSel"]["HostIP"]
+    mysqlUser = authdata["TonStatHlrSel"]["User"]
+    mysqlPasswd = authdata["TonStatHlrSel"]["Passwd"]
+    mysqlDBName = authdata["TonStatHlrSel"]["DBName"]
+    mysqlTabName = authdata["TonStatHlrSel"]["TabName"]
 
 with open('./BackEnds/entryFilters/Utils/dbUtils/dbResponses.json') as json_response_file:
     respodata = json.load(json_response_file)
@@ -38,11 +39,11 @@ def valueUpdateAppender(varA, varB):
         cursorA = dbA.cursor()
         
         cursorA.execute (""" 
-            SELECT %s 
-            FROM tokenStatusHandler 
+            SELECT %s
+            FROM %s 
             WHERE token = '%s'
             """ 
-            % (varA , varB)
+            % (varA, mysqlTabName, varB)
             )
         outValues = cursorA.fetchone()
         outValue =  outValues[0]

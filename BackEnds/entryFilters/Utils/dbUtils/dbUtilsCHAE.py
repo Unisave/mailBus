@@ -23,6 +23,7 @@ with open('./BackEnds/entryFilters/Utils/dbUtils/trackerDBConfig.json') as json_
     mysqlHackuser = authdata["hackClickLogIns"]["User"]
     mysqlPasswd = authdata["hackClickLogIns"]["Passwd"]
     mysqlDBName = authdata["hackClickLogIns"]["DBName"]
+    mysqlTabName = authdata["hackClickLogIns"]["TabName"]
 
 #MySQL response string decalaration centralised
 with open('./BackEnds/entryFilters/Utils/dbUtils/dbResponses.json') as json_response_file:
@@ -38,9 +39,9 @@ def hackClickAttemptExist(trackerIP,triggerTime):
         dbX = MySQLdb.connect(host=mysqlHostIP, user=mysqlHackuser, passwd=mysqlPasswd, db=mysqlDBName) #AUTHENTICATION TO BE ENCRYPTED AND MOVED OUT SOON 
         #enable MySQL tunnel proxy for security ssh user@host.com -L 9990:localhost:3306
         cursorX = dbX.cursor()
-        cursorX.execute (""" INSERT INTO hackClickLog(IPLOG, TIMELOG)
+        cursorX.execute (""" INSERT INTO %s(IPLOG, TIMELOG)
             VALUES ('%s', '%s') """ 
-            % (var1, var2))
+            % (mysqlTabName, var1, var2))
         resultsX = cursorX.fetchall()
         dbX.commit()
         dbX.close()

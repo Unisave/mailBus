@@ -22,6 +22,7 @@ with open('./BackEnds/entryFilters/Utils/dbUtils/trackerDBConfig.json') as json_
     mysqlUser = authdata["badTraktempIns"]["User"]
     mysqlPasswd = authdata["badTraktempIns"]["Passwd"]
     mysqlDBName = authdata["badTraktempIns"]["DBName"]
+    mysqlTabName = authdata["badTraktempIns"]["TabName"]
 
 with open('./BackEnds/entryFilters/Utils/dbUtils/dbResponses.json') as json_response_file:
     respodata = json.load(json_response_file)
@@ -40,9 +41,9 @@ def noTrackerExist(trackerNumber,trackerIP,triggerTime,geoJS):
         db1 = MySQLdb.connect(host=mysqlHostIP, user=mysqlUser, passwd=mysqlPasswd, db=mysqlDBName) #AUTHENTICATION TO BE ENCRYPTED AND MOVED OUT SOON 
         #enable MySQL tunnel proxy for security ssh user@host.com -L 9990:localhost:3306
         cursor1 = db1.cursor()
-        cursor1.execute ("""INSERT INTO bad_trackers_temp(tracker, TIMESTAMPER, badIP, geoTracker) 
-            VALUES ('%s', '%s', '%s', '%s');"""
-            % (var1, var2, var3, var4))
+        cursor1.execute ("""INSERT INTO %s(tracker, TIMESTAMPER, badIP, geoTracker) 
+            VALUES ('%s', '%s', '%s', '%s') """
+            % (mysqlTabName, var1, var2, var3, var4))
         results1 = cursor1.fetchall()
         db1.commit()
         db1.close()
